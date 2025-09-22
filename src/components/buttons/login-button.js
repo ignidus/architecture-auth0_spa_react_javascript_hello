@@ -9,9 +9,11 @@ export const LoginButton = () => {
       appState: {
         returnTo: "/profile",
       },
-      authorizationParams: {
-        prompt: "login",
-      },
+      // Prompt login will always force a login prompt. We don't want this for SSO so commenting it out.
+      //
+      // authorizationParams: {
+      //   prompt: "login",
+      // },
     });
   };
 
