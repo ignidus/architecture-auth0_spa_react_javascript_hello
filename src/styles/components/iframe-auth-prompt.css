@@ -1,0 +1,8 @@
+.iframe-auth-prompt {
+  margin-top: 48px;
+}
+
+.iframe-auth-prompt__error {
+  margin-top: 16px;
+  color: var(--white);
+}

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { CodeSnippet } from "../components/code-snippet";
 import { PageLayout } from "../components/page-layout";
+import { useApiAccessToken } from "../hooks/use-api-access-token";
 import { getAdminResource } from "../services/message.service";
 
 export const AdminPage = () => {
+  const getApiAccessToken = useApiAccessToken();
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     let isMounted = true;
 
     const getMessage = async () => {
-      const { data, error } = await getAdminResource();
+      const { data, error } = await getAdminResource(getApiAccessToken);
 
       if (!isMounted) {
         return;
@@ -30,7 +32,7 @@ export const AdminPage = () => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [getApiAccessToken]);
 
   return (
     <PageLayout>
@@ -42,7 +44,8 @@ export const AdminPage = () => {
           <p id="page-description">
             <span>
               This page retrieves an <strong>admin message</strong> from an
-              external API.
+              external API using <code>getAccessTokenSilently</code> and an{" "}
+              <code>Authorization: Bearer</code> header.
             </span>
             <span>
               <strong>
